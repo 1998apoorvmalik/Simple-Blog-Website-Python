@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>All Blogs</h1>
+
+{% if blogs %}
+  {% for b in blogs %}
+    <div style="margin-bottom:20px;">
+      <hr>
+      <h3>{{ b.title }}</h3>
+      <p>{{ b.content }}</p>
+      <small>
+        By {{ b.username }} on {{ b.timestamp }}
+      </small><br>
+      {% if user and user.username == b.username %}
+        <a href="{{ url_for('delete', blog_id=b.id) }}">Delete</a>
+      {% endif %}
+      <hr>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No blogs yet.</p>
+{% endif %}
+{% endblock %}
